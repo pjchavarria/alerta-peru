@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="es-PE">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alerta Perú · datos del día</title>
+<style>
+body{margin:0;background:#fbf6ee;color:#2a2118;font:18px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:640px;margin:0 auto;padding:32px 20px 48px}
+h1{font-size:30px;line-height:1.15;margin:0 0 8px}h2{font-size:20px;margin:28px 0 6px}
+p{margin:8px 0}.d{color:#6b5d4d}a{color:#0f6b5c}li{margin:6px 0}
+.n{margin-top:28px;padding:14px 16px;border-radius:14px;background:#f4ecdf}
+</style>
+</head>
+<body>
+<main>
+<h1>Alerta Perú · datos del día</h1>
+<p class="d" id="fecha">Datos oficiales que lee la app Alerta Perú.</p>
+<h2>Qué hay aquí</h2>
+<ul>
+<li><a href="avisos.json">avisos.json</a>: los avisos meteorológicos vigentes del SENAMHI, con su texto y su nivel en cada distrito.</li>
+<li><a href="dengue.json">dengue.json</a>: los casos de dengue de este año en cada distrito y las últimas semanas de cada departamento, del CDC-Perú (MINSA).</li>
+</ul>
+<h2>Fuentes</h2>
+<ul>
+<li>SENAMHI, avisos meteorológicos: el nivel por distrito sale del mapa que publica INGEMMET (Perú Alerta) y el texto, del boletín del COEN-INDECI.</li>
+<li>CDC-Perú (MINSA), sala situacional de dengue.</li>
+<li>Distritos, para dar a cada uno su nivel: INEI, vía OCHA HDX (2020), y los creados después, © colaboradores de OpenStreetMap (ODbL).</li>
+</ul>
+<p class="n">Este sitio no es del Estado peruano ni lo representa.</p>
+</main>
+<script>
+fetch('index.json').then(function (r) { return r.json(); }).then(function (d) {
+  var f = new Date(d.avisos);
+  document.getElementById('fecha').textContent = 'Datos oficiales que lee la app Alerta Perú. Avisos leídos el ' +
+    f.toLocaleDateString('es-PE', { day: 'numeric', month: 'long', year: 'numeric' }) + '; dengue hasta el corte del ' + d.dengueCorte + '.';
+});
+</script>
+</body>
+</html>
